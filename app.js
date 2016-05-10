@@ -4,7 +4,6 @@ var express = require("express"),
     signup = require("./routes/signup"),
     login = require("./routes/login");
 
-
 //middle ware section
 var app = express();
 app.use(morgan("dev"));
