@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Profile</title>
+    </head>
+    <body>
+        <form action="/update/<%= result.userId %>" method="post">
+            <h1>Edit Form</h1>
+            <table>
+                <tr>
+                    <td>User email: </td>
+                    <td><input type="text" name="email" ng-model="email" name="email" value="<%= result.email %>"/></td>
+                </tr>
+                <tr>
+                    <td>Username: </td>
+                    <td><input type="text" name="username" ng-model="username" name="username" value="<%= result.username %>"/></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="text" name="password" ng-model="password" name="password" value="<%= result.password %>"/></td>
+                </tr>
+                <tr>
+                    <!--
+                    <td>
+                        <button type="button" ng-click="validateForm(email, username, password)"></button>
+                    </td>-->
+                    <td><input type="Submit" value="Sign Up" /></td>
+                </tr>
+        </form>
+    </body>
+</html>
