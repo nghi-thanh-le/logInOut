@@ -4,6 +4,11 @@ var express = require("express"),
 
 var resultFromInsert = {};
 var router = express.Router();
+connection.connect(function (err) {
+    if (err) throw err;
+
+    console.log("Connected to data from sign up site!");
+})
 
 router.get("/", function (req, res) {
     res.render("signup");

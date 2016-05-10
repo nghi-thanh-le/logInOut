@@ -8,7 +8,4 @@ var connection = mysql.createConnection({
     database: "logInOut"
 });
 
-module.exports = connection.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected to database!");
-});
+module.exports = connection;
