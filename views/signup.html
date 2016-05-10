@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
     <head>
         <meta charset="utf-8">
         <title>Sign Up page</title>
     </head>
-    <body>
-        <form action="" method="GET">
+    <body ng-controller="myController">
+        <form action="/signup" method="post">
             <h1>Sign up Form</h1>
             <table>
                 <tr>
                     <td>User email: </td>
-                    <td><input type="text" /></td>
+                    <td><input type="text" name="email" required/></td>
                 </tr>
                 <tr>
                     <td>Username: </td>
-                    <td><input type="text" /></td>
+                    <td><input type="text" name="username" required/></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
-                    <td><input type="text" /></td>
+                    <td><input type="text" name="password" required/></td>
                 </tr>
                 <tr>
-                    <td><input type="Submit" value="signup" /></td>
+                    <td><input type="Submit" value="Sign Up"/></td>
                 </tr>
             </table>
         </form>
@@ -29,5 +29,13 @@
         <hr />
         <h2>Display error if username already exists</h2>
         <h3></h3>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script type="text/javascript">
+            var myApp = angular.module("myApp", []);
+            myApp.controller("myController", function ($scope) {
+
+            });
+        </script>
     </body>
 </html>
