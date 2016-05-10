@@ -5,6 +5,11 @@
         <title>Success</title>
     </head>
     <body>
-        <h1 style="color: tommato;">Nice! You logged in successfully</h1>
+        <h1 style="color: tomato;">Hello <%= result.username %>! Welcome back!!!!</h1>
+
+        <ul>
+            <li><a href="/update/<%= result.userId %>">Update your profile</a></li>
+            <li><a href="/delete/<%= result.username %>">Delete your account</a></li>
+        </ul>
     </body>
 </html>
