@@ -15,7 +15,6 @@ var connection = mysql.createConnection({
 });
 connection.connect(function (err) {
     if (err) throw err;
-
     console.log("Connected to mysql database! " + connection.threadId);
 });
 
@@ -23,13 +22,15 @@ connection.connect(function (err) {
 var app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.set("view engine", "ejs");
 // app.VERB section
+
+/* SIGNUP */
 app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "views/signup.html"));
+    res.render("signup");
 });
 
-app.post("/signup", function (req, res) {
+app.post("/signup", function (req, res, next) {
     // get the form submit file
     var post = {
         username: req.body.username,
@@ -38,20 +39,42 @@ app.post("/signup", function (req, res) {
     };
 
     // insert to user table
-    var query = connection.query("INSERT INTO users SET ?", post,function (err, result) {
+    connection.query("INSERT INTO users SET ?", post,function (err, result) {
         if (err) throw err;
-
-        res.sendFile(__dirname + "/views/index.html");
+        res.redirect("/user");
     });
-    console.log(query.sql);
 });
 
-/*
+/* LOGIN */
 app.get("/login", function (req, res) {
-    res.sendFile(path.join(__dirname, "views/login.html"));
-})*/;
+    res.render("login");
+});
 
-app.post("/signup", function (req, res) {
+
+app.post("/login", function (req, res) {
+    // get user input
+    var post = {
+        username: req.body.username,
+        password: sha1(req.body.password)
+    };
+
+    // get from database
+    var query = "SELECT * FROM `users` WHERE `username` = '" + post.username + "' AND `password` = '" + post.password + "'";
+    connection.query(query, function (err, results) {
+        if(err) throw err;
+
+        var result = results[0];
+        console.log(result.userId + "_" + result.username + "_" + result.email + "_" + result.password);
+    })
+});
+
+/* USER interface */
+app.get("/user", function (req, res) {
+    res.render("index");
+});
+
+/* ADMIN */
+app.get("/admin", function (req, res) {
 
 });
 
