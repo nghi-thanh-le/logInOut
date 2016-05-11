@@ -3,6 +3,12 @@ var express = require("express"),
     path = require("path"),
     connection = require("../database/mysqlDatabase.js");
 
+connection.connect(function (err) {
+    if (err) throw err;
+
+    console.log("Connected to data from login site!");
+});
+
 router.get("/", function (req, res) {
     res.render("login");
 });
