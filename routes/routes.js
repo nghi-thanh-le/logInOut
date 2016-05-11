@@ -23,9 +23,7 @@ router.post("/", function (req, res) {
     connection.query("INSERT INTO users SET ?", post, function (err, result) {
         if (err) throw err;
 
-        console.log(result);
-
-        //res.redirect("/profile");
+        res.redirect("/login");
     });
 });
 
@@ -81,7 +79,7 @@ router.post("/update/:userId", function (req, res) {
     connection.query(sqlQuery, post, function (err) {
         if (err) throw err;
 
-        // I hate to do this but I don't know what to do smarter
+        // I hate to do this but I don't know how to do smarter or better solution
         var query = "SELECT userId, username FROM `users` WHERE `userId` = '" + req.params.userId + "'";
         connection.query(query, function (err, results) {
             if (err) throw err;
