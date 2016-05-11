@@ -12,13 +12,11 @@ router.get("/check/:username/:password", function (req, res) {
         username: req.params.username,
         password: req.params.password
     };
-    console.log('paramiters:::', post);
 
     // get from database
     var query = "SELECT username, password FROM `users` WHERE `username` = '" + post.username + "' OR `password` = '" + post.password + "'";
     connection.query(query, function (err, results) {
         if (err) throw err;
-        console.log('result::', results);
         if(results.length === 0) {
             res.json({
                 "existed": false,
@@ -127,7 +125,7 @@ router.post("/update/:userId", function (req, res) {
 });
 
 router.get("/delete/:userId", function (req, res) {
-    var query = "DELETe FROM users WHERE `userId` = '" + req.params.userId + "'";
+    var query = "DELETE FROM users WHERE `userId` = '" + req.params.userId + "'";
     connection.query(query, function (err) {
         if (err) throw err;
         res.redirect("/");
