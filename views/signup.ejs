@@ -32,11 +32,13 @@
                             <button type="button" class="btn btn-success" ng-click="checkExist()"> Check in database</button>
                         </div>
                     </div>
-
                 </fieldset>
             </form>
         </div>
 
         <hr />
+        <p>
+            Already signed up? Click <a href="/login">here</a> to login!
+        </p>
         <h3 ng-show="message" class="lead text-danger">{{message}}</h3>
 <%- include partials/footer.ejs %>
