@@ -1,54 +1,42 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
-    <head>
-        <meta charset="utf-8">
-        <title>Sign Up page</title>
-    </head>
-    <body ng-controller="myController">
-        <form action="/" method="post">
-            <h1>Sign up Form</h1>
-            <table>
-                <tr>
-                    <td>User email: </td>
-                    <td><input type="text" name="email" ng-model="email" name="email"/></td>
-                </tr>
-                <tr>
-                    <td>Username: </td>
-                    <td><input type="text" name="username" ng-model="username" name="username"/></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="text" name="password" ng-model="password" name="password"/></td>
-                </tr>
-                <tr>
-                    <!--
-                    <td>
-                        <button type="button" ng-click="validateForm(email, username, password)"></button>
-                    </td>-->
-                    <td><input type="Submit" value="Sign Up" /></td>
-                </tr>
-            </table>
-        </form>
+<%- include partials/header.ejs %>
+        <div class="row">
+            <form class="form-horizontal col-md-5" action="/" method="post">
+                <fieldset>
+                    <legend>Sign Up Form</legend>
 
-        <p>Already signup? Click <a href="/login">here</a> to log in </p>
+                    <div class="form-group">
+                        <label for="email" class="col-lg-2 control-label">Email:</label>
+                        <div class="col-lg-10">
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                    </div>
 
-        <ul>
-            <li>{{ email }}</li>
-            <li>{{ username }}</li>
-            <li>{{ password }}</li>
-        </ul>
+                    <div class="form-group">
+                        <label for="username" class="col-lg-2 control-label">Username:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="username" ng-model="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-lg-2 control-label">Password:</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="password" ng-model="password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-primary" ng-show="!existed">Submit</button>
+                            <button type="button" class="btn btn-success" ng-click="checkExist()"> Check in database</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
         <hr />
-        <h2>Display error if username already exists</h2>
-        <h3></h3>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-        <script type="text/javascript">
-            var myApp = angular.module("myApp", []);
-            myApp.controller("myController", function ($scope) {
-                $scope.validateForm = function(email, username, password) {
-
-                }
-            });
-        </script>
-    </body>
-</html>
+        <h3 ng-show="message" class="lead text-danger">{{message}}</h3>
+<%- include partials/footer.ejs %>
