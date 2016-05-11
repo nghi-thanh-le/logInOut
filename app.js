@@ -1,9 +1,7 @@
 var express = require("express"),
     morgan = require("morgan"),
     bodyParser = require("body-parser"),
-    signup = require("./routes/signup"),
-    login = require("./routes/login"),
-    update = require("./routes/update");
+    routes = require("./routes/routes");
 
 //middle ware section
 var app = express();
@@ -11,13 +9,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 // app.VERB section
-
-/* SIGNUP */
-app.use("/", signup);
-/* LOGIN */
-app.use("/login", login);
-/* UPDATE */
-app.use("/update", update);
+app.use("/", routes);
+//app.use("/update", update);
 
 /* USER interface */
 /*
