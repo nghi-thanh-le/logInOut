@@ -29,6 +29,9 @@ start the server for database (Apache for example)
 npm install
 npm start
 ```
+<<<<<<< HEAD
 
 To modify the connection for database:
  - Goes to database/mysqlDatabase and change the properties of object in mysql.createConnection
+=======
+>>>>>>> 39ca8a5b7f8bbd0246a7f4fa9554a72d6a92e975
