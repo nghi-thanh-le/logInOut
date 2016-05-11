@@ -7,6 +7,39 @@ connection.connect(function (err) {
     console.log("Connect to database");
 });
 
+router.get("/check/:username/:password", function (req, res) {
+    var post = {
+        username: req.params.username,
+        password: req.params.password
+    };
+    console.log('paramiters:::', post);
+
+    // get from database
+    var query = "SELECT username, password FROM `users` WHERE `username` = '" + post.username + "' OR `password` = '" + post.password + "'";
+    connection.query(query, function (err, results) {
+        if (err) throw err;
+        console.log('result::', results);
+        if(results.length === 0) {
+            res.json({
+                "existed": false,
+                "message": "This user does not exist, Please sign up"
+            });
+        } else {
+            if(post.password != results[0].password && post.username == results[0].username) {
+                res.json({
+                    "existed": true,
+                    "message": "Username is registed and incorrect password"
+                })
+            } else {
+                res.json({
+                    "existed": true,
+                    "message": "Username and password are registed! You choose another!"
+                });
+            }
+        }
+    });
+});
+
 router.get("/", function (req, res) {
     res.render("signup");
 });
