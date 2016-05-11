@@ -69,17 +69,28 @@ router.post("/login", function (req, res) {
         password: req.body.password
     };
 
-    // get from database
-    var query = "SELECT userId, username FROM `users` WHERE `username` = '" + post.username + "' AND `password` = '" + post.password + "'";
-    connection.query(query, function (err, results) {
-        if (err) throw err;
+    if(post.username === "admin" && post.password === "admin") {
+        var query = "SELECT * FROM `users`";
+        var result = [];
+        connection.query(query, function (err, results) {
+            for(var i = 1; i < results.length; i++) {
+                result.push(results[i]);
+            }
+            res.render("admin", { result });
+        });
+    } else {
+        // get from database
+        var query = "SELECT userId, username FROM `users` WHERE `username` = '" + post.username + "' AND `password` = '" + post.password + "'";
+        connection.query(query, function (err, results) {
+            if (err) throw err;
 
-        var result = {
-            userId: results[0].userId,
-            username: results[0].username
-        };
-        res.render("index", { result });
-    });
+            var result = {
+                userId: results[0].userId,
+                username: results[0].username
+            };
+            res.render("index", { result });
+        });
+    }
 });
 
 router.get("/update/:userId", function (req, res) {
